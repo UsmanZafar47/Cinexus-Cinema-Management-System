@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+ <!-- <AnchorPane fx:id="loginPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="application.LoginController">
+    <children>
+        <VBox layoutX="200.0" layoutY="50.0" spacing="10" alignment="CENTER">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white; " text="Cinexus Cinemas" />
+            <TextField fx:id="usernameField" promptText="Username" />
+            <PasswordField fx:id="passwordField" promptText="Password" />
+            <ComboBox fx:id="roleComboBox" style="-fx-background-color: #FF0022; -fx-text-fill: white; -fx-prompt-text-fill: white;" promptText="Select Role" />
+            <Button fx:id="loginButton" onAction="#onLoginButtonClicked" style="-fx-background-color: #FF0022; -fx-text-fill: white;" text="Login" />
+            <Text fx:id="actionTarget" />
+        </VBox>
+    </children>
+</AnchorPane>
+   -->
+  <AnchorPane fx:id="loginPane" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #FBF7D5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+    <children>
+        <VBox layoutX="50.0" layoutY="80.0" spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-fill: black;" text="Hi!" />
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-fill: black;" text="Welcome"/>
+            <TextField fx:id="usernameField" promptText="Username, Email or Phone Number" />
+            <PasswordField fx:id="passwordField" promptText="Password" />
+             <HBox spacing="10">
+                <CheckBox fx:id="rememberMeCheckBox" text="Remember Me" />
+                <Text fx:id="forgotPasswordText" style="-fx-underline: true; -fx-fill: #0000FF;" text="Forgot Password?" />
+            </HBox>
+       <ComboBox fx:id="roleComboBox" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-prompt-text-fill: white;" promptText="Select Role" />
+                <Button fx:id="loginButton" onAction="#onLoginButtonClicked" style="-fx-background-color: #000000; -fx-text-fill: white;" text="Log In" />
+            <Text fx:id="actionTarget" />
+             <HBox alignment="CENTER">
+                <Text text="Don't have an account? " />
+                <Text fx:id="signUpText" style="-fx-underline: true; -fx-fill: #0000FF;" text="Sign Up" />
+            </HBox> 
+        </VBox>
+    </children>
+</AnchorPane>
+  

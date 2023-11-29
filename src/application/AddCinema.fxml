@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+
+
+<AnchorPane fx:id="AddCinemaPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" 
+ fx:controller="application.AddCinemaController">
+   <children>
+<VBox layoutX="50.0" layoutY="50.0" spacing="10" alignment="CENTER">
+    <TextField fx:id="cinemaNameField" promptText="Cinema Name"/>
+    <TextField fx:id="cinemaLocationField" promptText="Location"/>
+    <TextField fx:id="manager_IDArea" promptText="Manager_ID"/>
+    <TextField fx:id="manager_nameArea" promptText="Manager_name"/>
+    <Button text="Submit" onAction="#handleSubmit"/>
+</VBox>
+</children>
+</AnchorPane>
