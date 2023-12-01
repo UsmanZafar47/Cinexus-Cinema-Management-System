@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="loginPane" prefHeight="600.0" prefWidth="800.0" styleClass="background" 
+xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+    <children>
+        <VBox alignment="CENTER" spacing="20.0" prefHeight="400.0" prefWidth="600.0" >
+            <Text styleClass="title" text="Welcome Back to Cinexus"/>
+            <TextField fx:id="usernameField" promptText="Username" styleClass="text-field" />
+            <PasswordField fx:id="passwordField" promptText="Password" styleClass="text-field" />
+            <HBox spacing="10">
+                <CheckBox fx:id="rememberMeCheckBox" text="Remember Me" />
+            </HBox>
+            <Button fx:id="loginButton" onAction="#onLogin" styleClass="custom-button" text="Log In" />
+            <Text fx:id="actionTarget" styleClass="action-text" />
+            <HBox>
+                <Text text="Don't have an account? " />
+                <Button fx:id="signupButton" text="Signup" styleClass="signup-button"  onAction="#loadSignup"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

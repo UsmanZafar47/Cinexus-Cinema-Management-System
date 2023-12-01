@@ -1,0 +1,40 @@
+.background {
+    -fx-background-color: #303030;
+}
+
+.title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-fill: #ffffff;
+}
+
+.text-field {
+    -fx-pref-width: 200;
+    -fx-font-size: 14px;
+}
+
+.custom-combo-box {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+    -fx-pref-width: 200;
+    -fx-font-size: 14px;
+}
+
+.custom-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-pref-width: 100;
+    -fx-font-size: 14px;
+}
+
+.action-text {
+    -fx-fill: #ff0000;
+}
+
+.signup-button {
+    -fx-background-color: #FF0022;
+    -fx-text-fill: white;
+    -fx-pref-width: 100;
+    -fx-font-size: 14px;
+}
