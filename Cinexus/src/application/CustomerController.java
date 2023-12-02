@@ -97,6 +97,7 @@ public class CustomerController
             // Load the FXML file for the "MovieDetailsPage" page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieDetailsPage.fxml"));
             Parent root = loader.load();
+<<<<<<< Updated upstream
 
             // Get the controller for the "MovieDetailsPage" page
             MovieDetailsPage movieDetailsController = loader.getController();
@@ -114,6 +115,9 @@ public class CustomerController
             movieDetailsController.setMovieDetails(movieName, cinemaName, showtimes);
 
             // Create a new scene
+=======
+            Stage stage = (Stage) Trackticket.getScene().getWindow();
+>>>>>>> Stashed changes
             Scene scene = new Scene(root);
 
             // Get the stage from any node (e.g., "movieListView")
