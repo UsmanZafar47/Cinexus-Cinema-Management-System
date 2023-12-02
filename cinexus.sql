@@ -11,7 +11,9 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     role ENUM('Customer', 'Admin', 'Cinema Manager', 'Event Organizer') NOT NULL
 );
-INSERT into users (username, password, name, cnic, email, role) VALUES ("Usman", "321", "Usman", "12", "usman@gmail.com", "Customer"); 
+INSERT into users (username, password, name, cnic, email, role) VALUES 
+("Usman", "321", "Usman", "12", "usman@gmail.com", "Customer"),
+("Rayyan", "123", "Rayyan", "121", "rayyan@gmail.com", "Cinema Manager"); 
 select * from users;
 
 
@@ -38,34 +40,44 @@ JOIN cinema c ON s.cinema_id = c.cinema_id
 GROUP BY m.title, c.name;
 
 
-
+DROP TABLE cinema;
 CREATE TABLE cinema (
     cinema_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
-	manager_id int,
-    manager_name VARCHAR(50)
+	manager_id int NOT NULL,
+    FOREIGN KEY (manager_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-insert into cinema (name, location, manager_name) values ("Cinepex","Islamabad","John Aik");
-insert into cinema (name, location, manager_name) values ("Megapex","Islamabad","John Doe");
+insert into cinema (name, location, manager_id) values 
+("Cinepex","Islamabad", 2), ("Megapex","Islamabad", 2);
 select * from cinema;
+SELECT * FROM cinema WHERE manager_id = 2;
 
 
-
-CREATE TABLE showtimes (
-    showtime_id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_id INT,
-    cinema_id INT,
+CREATE TABLE seats (
+    seat_id INT AUTO_INCREMENT PRIMARY KEY,
+    cinema_id INT NOT NULL,
     showtime DATETIME NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movies(movie_id),
     FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id)
 );
 INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES (1, 1, '2023-12-10 18:00:00');
 insert into showtimes (movie_id, cinema_id, showtime) values (1, 2, '2023-12-10 19:00:00');
-INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES (2, 1, '2023-12-10 20:00:00');
-insert into showtimes (movie_id, cinema_id, showtime) values (2, 2, '2023-12-10 21:00:00');
-INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES (3, 1, '2023-12-10 22:00:00');
-insert into showtimes (movie_id, cinema_id, showtime) values (3, 2, '2023-12-10 23:00:00');
+
+
+DROP Table showtimes;
+CREATE TABLE showtimes (
+    showtime_id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    cinema_id INT,
+    showtime DATETIME NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE,
+    FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id) ON DELETE CASCADE
+);
+INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES 
+(1, 1, '2023-12-10 18:00:00'), (1, 2, '2023-12-10 19:00:00'), 
+(2, 1, '2023-12-10 20:00:00'), (2, 2, '2023-12-10 21:00:00'), 
+(3, 1, '2023-12-10 22:00:00'), (3, 2, '2023-12-10 23:00:00');
 
 
 DROP Table tickets;

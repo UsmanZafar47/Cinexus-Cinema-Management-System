@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="CinemaManagerMainPane" prefHeight="600.0" prefWidth="800.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CinemaManagerController">
+    <children>
+        <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #F0F0F0; padding: 20px;">
+            <HBox>
+	            <Button fx:id="AddCinema" text="Add Cinema" styleClass="button"  onAction="#addCinema"/>
+	            <Button fx:id="ArrangeShowings" text="Arrange Showings" styleClass="button"  onAction="#addDeleteShowings"/>
+            </HBox>
+
+            <!-- Title -->
+            <Label styleClass="title" text="Cinema List" />
+
+            <!-- Cinema List -->
+            <VBox fx:id="CinemaListView" spacing="10">
+                <!-- Cinema Entries will be dynamically added here -->
+            </VBox>
+            <HBox>
+            <TextField fx:id="CenimaIDforDelete" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Cinema ID" styleClass="text-field" />
+            <Button fx:id="DeleteCinema" text="Delete Cinema" styleClass="custom-button"  onAction="#DeleteCinema"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

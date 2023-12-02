@@ -57,9 +57,9 @@ public class Main extends Application
             if (loggedinUser.getUserRole().equalsIgnoreCase("Customer"))
             	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
             else if(loggedinUser.getUserRole().equalsIgnoreCase("Admin"))
-            	loadNewPage("SignUp", loginButton, loggedinUser);
+            	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
             else if(loggedinUser.getUserRole().equalsIgnoreCase("Cinema Manager"))
-            	loadNewPage("SignUp", loginButton, loggedinUser);
+            	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
             else
                 actionTarget.setText("Login Successful as a " + loggedinUser.getUserRole() + " but not in db");            	
         }
@@ -83,15 +83,26 @@ public class Main extends Application
         }
     }
     
-    public void loadNewPage(String page, Node button, User user) {
+    public void loadNewPage(String page, Node button, User user) 
+    {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/" + page + ".fxml"));
             Parent root = loader.load();
-            	CustomerController controller = loader.getController();
             
-            if (controller != null)
-                controller.setLoginUser(user);
-            
+			if(page.equals("CustomerMainPage"))
+			{
+				CustomerController controller = loader.getController();
+	            if (controller != null)
+	                controller.setLoginUser(user);
+			}
+			else if(page.equals("CinemaManagerMainPage"))
+			{
+				CinemaManagerController controller = loader.getController();
+	            if (controller != null)
+	                controller.initialize(user);
+			}
+			
+			
             Stage stage = (Stage) button.getScene().getWindow();
             Scene scene = new Scene(root);
 
@@ -102,6 +113,7 @@ public class Main extends Application
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         launch(args);
 	}   
