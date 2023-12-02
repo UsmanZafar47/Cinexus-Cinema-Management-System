@@ -49,11 +49,15 @@ public class CustomerController
         movieInfoLabel.setStyle("-fx-font-weight: bold;");
         Button bookSeatsButton = new Button("Book Seats");
         Button viewMovieButton = new Button("View Movie");
-
+        
+        
         bookSeatsButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
         viewMovieButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
-        container.getChildren().addAll(movieInfoLabel, bookSeatsButton, viewMovieButton);
 
+        container.getChildren().addAll(movieInfoLabel, bookSeatsButton, viewMovieButton);
+        viewMovieButton.setOnAction(event -> viewMovie(movie.getId()));
+
+        
         container.setMargin(movieInfoLabel, new Insets(0, 10, 0, 10));
         container.setMargin(bookSeatsButton, new Insets(0, 10, 0, 10));
         container.setMargin(viewMovieButton, new Insets(0, 10, 0, 10));
@@ -86,22 +90,41 @@ public class CustomerController
         
     	loadNewPage("SignUp", Trackticket, Controlleritems);
     }
-    
-    private void ViewMovie()
-    { 
-    	try {
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieDetailsPage.fxml"));
+
+    @FXML
+    private void viewMovie(int movieId) {
+        try {
+            // Load the FXML file for the "MovieDetailsPage" page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieDetailsPage.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) viewMovie.getScene().getWindow();
+
+            // Get the controller for the "MovieDetailsPage" page
+            MovieDetailsPage movieDetailsController = loader.getController();
+
+            // Fetch movie details from the database using MovieDatabaseConnecter
+            MovieDatabaseConnecter movieDB = new MovieDatabaseConnecter();
+            List<Label> movieDetails = movieDB.movieDetails(movieId);
+
+            // Extract movie details from the List<Label>
+            String movieName = movieDetails.get(0).getText().replace("Movie Name: ", "");
+            String cinemaName = movieDetails.get(1).getText().replace("Cinema Name: ", "");
+            String showtimes = movieDetails.get(2).getText().replace("Showtimes:\n", "");
+
+            // Call setMovieDetails to set the movie details in the UI
+            movieDetailsController.setMovieDetails(movieName, cinemaName, showtimes);
+
+            // Create a new scene
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/uipackage/designLayout.css").toExternalForm());
+
+            // Get the stage from any node (e.g., "movieListView")
+            Stage stage = (Stage) movieListView.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     public void loadNewPage(String page, Node button, List<String> nextControllerInfo) 
     {
     	try {

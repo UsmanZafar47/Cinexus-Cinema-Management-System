@@ -85,35 +85,78 @@ public class MovieDatabaseConnecter implements DatabaseConnecter
         return movies;
     }
 	
-	public List<Label> movieDetails() throws SQLException 
-	{
+	public static List<Label> movieDetails(int movieId) throws SQLException {
 
-		Connection conn = null;
+	    Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
 
-		String query = "SELECT m.title, c.name AS cinema_name, GROUP_CONCAT(s.showtime SEPARATOR ', ') AS showtimes " +
-		        "FROM movies m " +
-		        "JOIN showtimes s ON m.movie_id = s.movie_id " +
-		        "JOIN cinema c ON s.cinema_id = c.cinema_id " +
-		        "GROUP BY m.title, c.name;";
-		
-		ResultSet resultSet = conn.createStatement().executeQuery(query);
+	    try {
+	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-        List<Label> allLabels = new ArrayList<Label>();
-		if (resultSet.next()) {
-		    String movieName = resultSet.getString("title");
-		    String cinemaName = resultSet.getString("cinema_name");
-		    String showtimes = resultSet.getString("showtimes");
+	        String query = "SELECT m.title, c.name AS cinema_name, GROUP_CONCAT(s.showtime SEPARATOR ', ') AS showtimes " +
+	                "FROM movies m " +
+	                "JOIN showtimes s ON m.movie_id = s.movie_id " +
+	                "JOIN cinema c ON s.cinema_id = c.cinema_id " +
+	                "WHERE m.movie_id = ? " +  // Filter by movie_id
+	                "GROUP BY m.title, c.name;";
 
-		    allLabels.add(null);
-		    allLabels.add(null);
-		    allLabels.add(null);
-		    allLabels.get(0).setText("Movie Name: " + movieName);
-		    allLabels.get(1).setText("Cinema Name: " + cinemaName);
-		    allLabels.get(2).setText("Showtimes:\n" + showtimes);
-		}
-		conn.close();
-		return allLabels;
+	        // Create a PreparedStatement with the query
+	        stmt = conn.prepareStatement(query);
+	        stmt.setInt(1, movieId); // Set the movie_id parameter
+
+	        rs = stmt.executeQuery();
+
+	        List<Label> allLabels = new ArrayList<Label>();
+
+	        if (rs.next()) {
+	            String movieName = rs.getString("title");
+	            String cinemaName = rs.getString("cinema_name");
+	            String showtimes = rs.getString("showtimes");
+
+	            Label label1 = new Label("Movie Name: " + movieName);
+	            Label label2 = new Label("Cinema Name: " + cinemaName);
+	            Label label3 = new Label("Showtimes:\n" + showtimes);
+
+	            allLabels.add(label1);
+	            allLabels.add(label2);
+	            allLabels.add(label3);
+	        }
+
+	        return allLabels;
+	    } finally {
+	        if (conn != null) conn.close();
+	    }
 	}
+//	public List<Label> movieDetails() throws SQLException 
+//	{
+//
+//		Connection conn = null;
+//	    PreparedStatement stmt = null;
+//	    ResultSet rs = null;
+//
+//		String query = "SELECT m.title, c.name AS cinema_name, GROUP_CONCAT(s.showtime SEPARATOR ', ') AS showtimes " +
+//		        "FROM movies m " +
+//		        "JOIN showtimes s ON m.movie_id = s.movie_id " +
+//		        "JOIN cinema c ON s.cinema_id = c.cinema_id " +
+//		        "GROUP BY m.title, c.name;";
+//		
+//		ResultSet resultSet = conn.createStatement().executeQuery(query);
+//
+//        List<Label> allLabels = new ArrayList<Label>();
+//		if (resultSet.next()) {
+//		    String movieName = resultSet.getString("title");
+//		    String cinemaName = resultSet.getString("cinema_name");
+//		    String showtimes = resultSet.getString("showtimes");
+//
+//		    allLabels.add(null);
+//		    allLabels.add(null);
+//		    allLabels.add(null);
+//		    allLabels.get(0).setText("Movie Name: " + movieName);
+//		    allLabels.get(1).setText("Cinema Name: " + cinemaName);
+//		    allLabels.get(2).setText("Showtimes:\n" + showtimes);
+//		}
+//		conn.close();
+//		return allLabels;
+//	}
 }
