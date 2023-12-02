@@ -18,7 +18,6 @@ import javafx.application.Application;
 
 public class Main extends Application 
 {
-	@FXML public ComboBox<String> roleComboBox;
 	@FXML public TextField usernameField;
     @FXML public PasswordField passwordField;
     @FXML public CheckBox rememberMeCheckBox;
@@ -55,34 +54,42 @@ public class Main extends Application
         String username = usernameField.getText();
         String password = passwordField.getText();
         
-        String isAuthenticated;
+        User loggedinUser = factory.createUser(username, password);
         
-		isAuthenticated = DatabaseConnecter.userAuthentication(username, password);
-		if (isAuthenticated.equalsIgnoreCase("Invalid")) {
+		if (loggedinUser.id == -1)
             actionTarget.setText("Invalid Username or Password");
-        } else 
+		else 
         {
-            if (isAuthenticated.equalsIgnoreCase("customer"))
-            	loadNewPage("SignUp");
-            else if(isAuthenticated.equalsIgnoreCase("admin"))
-            	loadNewPage("SignUp");
-            else if(isAuthenticated.equalsIgnoreCase("cinema Manager"))
-            	loadNewPage("SignUp");
+            if (loggedinUser.Role.equalsIgnoreCase("customer"))
+            	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
+            else if(loggedinUser.Role.equalsIgnoreCase("admin"))
+            	loadNewPage("AdminMainPage", loginButton, loggedinUser);
+            else if(loggedinUser.Role.equalsIgnoreCase("cinema Manager"))
+            	loadNewPage("SignUp", loginButton, loggedinUser);
             else
-                actionTarget.setText("Login Successful as a " + isAuthenticated + " but not in db");            	
+                actionTarget.setText("Login Successful as a " + loggedinUser.Role + " but not in db");            	
         }
     }
     
     @FXML
     public void loadSignup() {
-    	loadNewPage("SignUp");
+    	User GuestUser = factory.createUser();
+        loadNewPage("SignUp", signupButton, GuestUser);
     }
     
-    public void loadNewPage(String page) {
+    public void loadNewPage(String page, Node button, User user) {
     	try {
-            Parent root = FXMLLoader.load(getClass().getResource("/uipackage/"+page+".fxml"));
-            Stage stage = (Stage) signupButton.getScene().getWindow();
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/" + page + ".fxml"));
+            Parent root = loader.load();
+            CustomerController controller = loader.getController();
+
+            if (controller != null) {
+                controller.setLoginUser(user);
+            }
+            
+            Stage stage = (Stage) button.getScene().getWindow();
             Scene scene = new Scene(root);
+
             scene.getStylesheets().add(getClass().getResource("/uipackage/designLayout.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
