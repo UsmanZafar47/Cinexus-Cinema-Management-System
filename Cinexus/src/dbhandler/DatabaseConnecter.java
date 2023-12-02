@@ -4,9 +4,15 @@ import java.sql.*;
 
 public class DatabaseConnecter
 {
+<<<<<<< Updated upstream
 	private static final String URL = "jdbc:mysql://localhost/Cinexus";
 	private static final String USER = "root";
 	private static final String PASSWORD = "mySQLroot";
+=======
+	static final String URL = "jdbc:mysql://localhost/Cinexus";
+	static final String USER = "root";
+	static final String PASSWORD = "4326";
+>>>>>>> Stashed changes
 	
 	public static String userAuthentication(String username, String password)
 	{
