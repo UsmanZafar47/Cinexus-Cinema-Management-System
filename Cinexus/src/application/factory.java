@@ -23,4 +23,9 @@ public class factory
 		newUser.newUser(name, username, password, cnic, email, role);
 		return newUser;
 	}
+	static Cinema createNewCinema(String name, String location, int noseats, int manager_id)
+	{
+		Cinema newCinema = new Cinema(name, location, noseats, manager_id);
+		return null;
+	}
 }

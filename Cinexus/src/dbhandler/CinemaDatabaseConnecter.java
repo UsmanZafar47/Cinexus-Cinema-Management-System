@@ -16,6 +16,47 @@ import javafx.scene.control.Label;
 
 public class CinemaDatabaseConnecter implements DatabaseConnecter
 {
+	public int getID(String name, String location, int id)
+	{
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+
+	    try 
+	    {
+	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+	        String sql = "SELECT cinema_id FROM cinema WHERE name = ? AND location = ? AND manager_id = ?";
+
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, name);
+	        stmt.setString(2, location);
+	        stmt.setInt(3, id);
+
+	        rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            int cinemaID = rs.getInt("cinema_id");
+	            return cinemaID;
+	        }
+	        return -1;
+	    } 
+	    catch (SQLException e) 
+	    {
+	        e.printStackTrace();
+	        return -1;
+	    } 
+	    finally 
+	    {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	public String get(int id,  String columnName)
 	{
 		Connection conn = null;
@@ -72,6 +113,21 @@ public class CinemaDatabaseConnecter implements DatabaseConnecter
         }
     }
 	
+	public void AddSeats(int id) {
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    try {
+        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("INSERT into seats (cinema_id) VALUES ("+id+")");
+
+        if (stmt != null) stmt.close();
+        if (conn != null) conn.close(); 
+	    }
+	    catch (SQLException e) {
+	        e.printStackTrace(); } 
+	}
+	
 	public List<Cinema> fetchCinemaFromDatabase(int Userid) 
 	{
         List<Cinema> cinemas = new ArrayList<>();
@@ -104,27 +160,34 @@ public class CinemaDatabaseConnecter implements DatabaseConnecter
 
         return cinemas;
     }
-	/*
-	 * public List<Label> movieDetails() throws SQLException {
-	 * 
-	 * Connection conn = null; PreparedStatement stmt = null; ResultSet rs = null;
-	 * 
-	 * String query =
-	 * "SELECT m.title, c.name AS cinema_name, GROUP_CONCAT(s.showtime SEPARATOR ', ') AS showtimes "
-	 * + "FROM movies m " + "JOIN showtimes s ON m.movie_id = s.movie_id " +
-	 * "JOIN cinema c ON s.cinema_id = c.cinema_id " + "GROUP BY m.title, c.name;";
-	 * 
-	 * ResultSet resultSet = conn.createStatement().executeQuery(query);
-	 * 
-	 * List<Label> allLabels = new ArrayList<Label>(); if (resultSet.next()) {
-	 * String movieName = resultSet.getString("title"); String cinemaName =
-	 * resultSet.getString("cinema_name"); String showtimes =
-	 * resultSet.getString("showtimes");
-	 * 
-	 * allLabels.add(null); allLabels.add(null); allLabels.add(null);
-	 * allLabels.get(0).setText("Movie Name: " + movieName);
-	 * allLabels.get(1).setText("Cinema Name: " + cinemaName);
-	 * allLabels.get(2).setText("Showtimes:\n" + showtimes); } conn.close(); return
-	 * allLabels; }
-	 */
+	public void InsertCinema(Cinema cinema)
+	{
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+
+	    try 
+	    {
+	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+	        String sql = "INSERT into cinema (name, location, manager_id) "
+	        		+ "VALUES (?, ?, ?)";
+
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, cinema.getName());
+	        stmt.setString(2, cinema.getLocation());
+	        stmt.setString(3, ""+cinema.getManager_id());
+	        
+	        int rows = stmt.executeUpdate();
+	        if (rows > 0)
+	            System.out.println("Cinema inserted successfully.");
+	         else 
+	            System.out.println("Cinema insertion failed.");
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close(); 
+	    } 
+	    catch (SQLException e) 
+	    {
+	        e.printStackTrace();
+	    }
+	}
 }

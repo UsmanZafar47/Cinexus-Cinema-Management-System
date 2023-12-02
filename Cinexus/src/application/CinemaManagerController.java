@@ -59,21 +59,21 @@ public class CinemaManagerController
         
         return entry;
     }
-//
-//    private Cinema[] addCinemaToArray(Cinema[] movies, Movie newMovie) 
-//    {
-//        int length = movies.length;
-//        Cinema[] newMovies = new Cinema[length + 1];
-//
-//        System.arraycopy(movies, 0, newMovies, 0, length);
-//        newMovies[length] = newMovie;
-//
-//        return newMovies;
-//    }
+
+    private Cinema[] addCinemaToArray(Cinema[] cinemas, Cinema newCinema) 
+    {
+        int length = cinemas.length;
+        Cinema[] newCinemas = new Cinema[length + 1];
+
+        System.arraycopy(cinemas, 0, newCinemas, 0, length);
+        newCinemas[length] = newCinema;
+
+        return newCinemas;
+    }
     
     @FXML
     public void addCinema() {
-    	loadNewPage("SignUp", AddCinema);
+    	loadNewPage("AddCinema", AddCinema);
     }
     
     @FXML
@@ -85,13 +85,26 @@ public class CinemaManagerController
     public void DeleteCinema() {
         CinemaDatabaseConnecter CinemaDB = new CinemaDatabaseConnecter();
         CinemaDB.DeleteCinemaFromDatabase(CenimaIDforDelete.getText());
+    	loadNewPage("CinemaManagerMainPage", DeleteCinema);
     }
     public void loadNewPage(String page, Node button) 
     {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/" + page + ".fxml"));
             Parent root = loader.load();
-            
+
+            if(page.equals("AddCinema"))
+			{
+            	AddCinemaController controller = loader.getController();
+	            if (controller != null)
+	                controller.initialize(CinemaManagerInfo);
+			}
+			else if(page.equals("CinemaManagerMainPage"))
+			{
+				CinemaManagerController controller = loader.getController();
+	            if (controller != null)
+	                controller.initialize(CinemaManagerInfo);
+			}
             
             Stage stage = (Stage) button.getScene().getWindow();
             Scene scene = new Scene(root);

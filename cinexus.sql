@@ -53,14 +53,12 @@ insert into cinema (name, location, manager_id) values
 select * from cinema;
 SELECT * FROM cinema WHERE manager_id = 2;
 
-
 CREATE TABLE seats (
     seat_id INT AUTO_INCREMENT PRIMARY KEY,
     cinema_id INT NOT NULL,
-    showtime DATETIME NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES movies(movie_id),
-    FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id)
+    FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id) ON DELETE CASCADE
 );
+Select * FROM seats;
 INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES (1, 1, '2023-12-10 18:00:00');
 insert into showtimes (movie_id, cinema_id, showtime) values (1, 2, '2023-12-10 19:00:00');
 
@@ -88,8 +86,8 @@ CREATE TABLE tickets (
     seat_number INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     status ENUM('booked', 'cancelled') NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (showtime_id) REFERENCES showtimes(showtime_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (showtime_id) REFERENCES showtimes(showtime_id) ON DELETE CASCADE
 );
 
 
