@@ -50,18 +50,18 @@ public class Main extends Application
         
         User loggedinUser = factory.createUser(username, password);
         
-		if (loggedinUser.id == -1)
+		if (loggedinUser.getUserID() == -1)
             actionTarget.setText("Invalid Username or Password");
 		else 
         {
-            if (loggedinUser.Role.equalsIgnoreCase("customer"))
+            if (loggedinUser.getUserRole().equalsIgnoreCase("Customer"))
             	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
-            else if(loggedinUser.Role.equalsIgnoreCase("admin"))
+            else if(loggedinUser.getUserRole().equalsIgnoreCase("Admin"))
             	loadNewPage("SignUp", loginButton, loggedinUser);
-            else if(loggedinUser.Role.equalsIgnoreCase("cinema Manager"))
+            else if(loggedinUser.getUserRole().equalsIgnoreCase("Cinema Manager"))
             	loadNewPage("SignUp", loginButton, loggedinUser);
             else
-                actionTarget.setText("Login Successful as a " + loggedinUser.Role + " but not in db");            	
+                actionTarget.setText("Login Successful as a " + loggedinUser.getUserRole() + " but not in db");            	
         }
     }
     

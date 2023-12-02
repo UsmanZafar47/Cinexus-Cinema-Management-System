@@ -4,10 +4,13 @@ import dbhandler.UserDatabaseConnecter;
 
 public class User 
 {
-	int id;
-	String Username;
-	String Password;
-	String Role;
+	private int id;
+	private String Username;
+	private String Password;
+	private String Role;
+	private String Email;
+	private String CNIC;
+	private String Name;
 	UserDatabaseConnecter UserDB = new UserDatabaseConnecter();
 	
 	public User() 
@@ -25,21 +28,59 @@ public class User
 	{
 		this.Username = username;
 		this.Password = password;
-		this.id = getUserID(this);
-		this.Role = getUserRole(this);
+		this.id = getUserID();
+		this.Role = getUserRole();
 	}
-	
-	public int getUserID(User user)
+	public User newUser(String name, String username, String password, String cnic, String email, String role) 
 	{
-		String uID = UserDB.getID(user.Username, user.Password);
-		if (uID.equals("Invalid"))
-			return -1;
-		int userID = Integer.parseInt(uID);
-		return userID;
+		this.Username = username;
+		this.Name = name;
+		this.Password = password;
+		this.CNIC = cnic;
+		this.Email = email;
+		this.Role = role;
+		
+		UserDB.InsertUser(this);
+		
+		this.id = getUserID();
+		
+		return this;
 	}
-	
-	public String getUserRole(User user)
+	public int getUserID()
 	{
-		return UserDB.get(user.id, "role");
+		if (this.id == 0 || this.id == -1)
+		{
+			this.id = UserDB.getID(this.Username, this.Password);
+		}
+		return id;
+	}
+	public String getUsername()
+	{
+		return this.Username;
+    }
+	public String getPassword()
+	{
+		return this.Password;
+    }
+	public String getName()
+	{
+		return this.Name;
+    }
+	public String getEmail()
+	{
+		return this.Email;
+    }
+	public String getcnic()
+	{
+		return this.CNIC;
+    }
+
+	public String getUserRole()
+	{
+		if (this.Role == null)
+		{
+			this.Role = UserDB.get(this.id, "role");
+		}
+		return Role;
     }
 }

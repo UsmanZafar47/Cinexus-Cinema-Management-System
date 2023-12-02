@@ -17,4 +17,10 @@ public class factory
 		User newUser = new User(username, password);
 		return newUser;
 	}
+	static User createNewUser(String name, String username, String password, String cnic, String email, String role)
+	{
+		User newUser = new User();
+		newUser.newUser(name, username, password, cnic, email, role);
+		return newUser;
+	}
 }

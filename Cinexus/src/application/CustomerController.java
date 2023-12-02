@@ -80,7 +80,7 @@ public class CustomerController
     public void trackTicket() {
         String ticketNo = ticketNoField.getText();
         List<String> Controlleritems = null;
-        Controlleritems.add(""+CustomerInfo.id);
+        Controlleritems.add(""+CustomerInfo.getUserID());
         Controlleritems.add(ticketNo);
         
     	loadNewPage("SignUp", Trackticket, Controlleritems);
