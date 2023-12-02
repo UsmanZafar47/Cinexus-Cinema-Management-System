@@ -1,11 +1,11 @@
 .background {
-    -fx-background-color: #303030;
+    -fx-background-color: #ffffff;
 }
 
 .title {
     -fx-font-size: 36px;
     -fx-font-weight: bold;
-    -fx-fill: #ffffff;
+    -fx-fill: #000000;
 }
 
 .text-field {
@@ -14,7 +14,7 @@
 }
 
 .custom-combo-box {
-    -fx-background-color: #000000;
+    -fx-background-color: #ffffff;
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
     -fx-pref-width: 200;
