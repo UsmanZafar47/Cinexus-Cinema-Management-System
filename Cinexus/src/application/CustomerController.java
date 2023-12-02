@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.List;
 import javafx.application.Application;
+import dbhandler.MovieDatabaseConnecter;
 import dbhandler.UserDatabaseConnecter;
 
 public class CustomerController
@@ -30,7 +31,7 @@ public class CustomerController
 	}
 	
     public void initialize() {
-        UserDatabaseConnecter MovieDB = new UserDatabaseConnecter();
+        MovieDatabaseConnecter MovieDB = new MovieDatabaseConnecter();
         List<Movie> movies = MovieDB.fetchMoviesFromDatabase();
         
         for (Movie movie : movies) 
@@ -86,8 +87,20 @@ public class CustomerController
     	loadNewPage("SignUp", Trackticket, Controlleritems);
     }
     
-    private void ViewMovie(ActionEvent event)
-    { }
+    private void ViewMovie()
+    { 
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieDetailsPage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) viewMovie.getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/uipackage/designLayout.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     public void loadNewPage(String page, Node button, List<String> nextControllerInfo) 
     {

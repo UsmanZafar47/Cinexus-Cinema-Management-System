@@ -133,35 +133,4 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        }
 	    }
 	}
-	
-public List<Movie> fetchMoviesFromDatabase() 
-	{
-        List<Movie> movies = new ArrayList<>();
-
-		Connection conn = null;
-	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
-        try 
-        {
-	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT movie_id, title FROM movies");
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("movie_id");
-                String title = resultSet.getString("title");
-
-                Movie movie = new Movie(id, title, 0, " ");
-                movies.add(movie);
-            }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return movies;
-    }
 }
