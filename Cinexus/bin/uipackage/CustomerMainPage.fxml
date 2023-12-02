@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="CustomerMainPane" prefHeight="600.0" prefWidth="800.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
+    <children>
+        <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #F0F0F0; padding: 20px;">
+            <HBox>
+            <TextField fx:id="ticketNoField" promptText="Enter Ticket No." styleClass="text-field" />
+            <Button fx:id="Trackticket" text="Track Ticket" styleClass="button"  onAction="#trackTicket"/>
+            </HBox>
+
+            <!-- Title -->
+            <Label styleClass="title" text="Movie List" />
+
+            <!-- Movie List -->
+            <VBox fx:id="movieListView" spacing="10">
+                <!-- Movie Entries will be dynamically added here -->
+            </VBox>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -27,6 +28,15 @@ public class MovieDetailsPage extends Application
         this.movieId = movieId;
     }
 
+    @FXML private Label movieNameLabel;
+    @FXML private Label cinemaNameLabel;
+    @FXML private Label showtimesLabel;
+
+    public void setMovieDetails(String movieName, String cinemaName, String showtimes) {
+        movieNameLabel.setText("Movie Name: " + movieName);
+        cinemaNameLabel.setText("Cinema Name: " + cinemaName);
+        showtimesLabel.setText("Showtimes:\n" + showtimes);
+    }
     @Override
     public void start(Stage primaryStage) throws SQLException 
     {
@@ -36,7 +46,7 @@ public class MovieDetailsPage extends Application
 
         List<Label> allLabels = new ArrayList<Label>();
         MovieDatabaseConnecter MovieDB = new MovieDatabaseConnecter();
-        allLabels = MovieDB.movieDetails();
+        allLabels = MovieDB.movieDetails(movieId);
         VBox root = new VBox(10);
         root.getChildren().addAll(allLabels);
 
@@ -51,4 +61,10 @@ public class MovieDetailsPage extends Application
         int movieId = 1;
         launch(args);
     }
+
+	public void setMovieId(int movieId2) {
+		movieId=movieId2;
+		// TODO Auto-generated method stub
+		
+	}
 }
