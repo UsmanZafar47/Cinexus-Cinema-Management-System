@@ -1,12 +1,15 @@
-package application;
+package dbhandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import dbhandler.DatabaseConnecter;
+import application.Movie;
 
 public class UserDatabaseConnecter implements DatabaseConnecter
 {
@@ -20,7 +23,7 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	    {
 	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-	        String sql = "SELECT userID FROM users WHERE username = ? AND password = ?";
+	        String sql = "SELECT user_id FROM users WHERE username = ? AND password = ?";
 
 	        stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, username);
@@ -29,7 +32,7 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        rs = stmt.executeQuery();
 
 	        if (rs.next()) {
-	            String userID = rs.getString("userID");
+	            String userID = rs.getString("user_id");
 	            return userID;
 	        }
 	        return "Invalid";
@@ -60,7 +63,7 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	    {
 	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-	        String sql = "SELECT "+columnName+" FROM users WHERE userID = " + id;
+	        String sql = "SELECT "+columnName+" FROM users WHERE user_id = " + id;
 
 	        stmt = conn.prepareStatement(sql);
 	        rs = stmt.executeQuery();
@@ -87,4 +90,35 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        }
 	    }
 	}
+	
+	public List<Movie> fetchMoviesFromDatabase() 
+	{
+        List<Movie> movies = new ArrayList<>();
+
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+        try 
+        {
+	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT movie_id, title FROM movies");
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("movie_id");
+                String title = resultSet.getString("title");
+
+                Movie movie = new Movie(id, title, 0, " ");
+                movies.add(movie);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movies;
+    }
 }

@@ -1,7 +1,5 @@
 package application;
-import java.sql.*;
-
-import dbhandler.DatabaseConnecter;
+import dbhandler.UserDatabaseConnecter;
 
 
 public class User 
