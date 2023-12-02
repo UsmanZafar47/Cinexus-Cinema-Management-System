@@ -103,9 +103,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) {
+public class Main extends Application 
+{
+	@FXML public TextField usernameField;
+    @FXML public PasswordField passwordField;
+    @FXML public CheckBox rememberMeCheckBox;
+    @FXML public Text signUpText;
+    @FXML public Text actionTarget;
+    @FXML public Node loginButton;
+    @FXML public Node signupButton;
+	
+	@Override
+	public void start(Stage primaryStage) 
+	{
         try {
             // Load the movie list FXML
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieList.fxml"));
@@ -123,5 +133,54 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+	}      
+
+    @FXML
+    public void onLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        
+        User loggedinUser = factory.createUser(username, password);
+        
+		if (loggedinUser.id == -1)
+            actionTarget.setText("Invalid Username or Password");
+		else 
+        {
+            if (loggedinUser.Role.equalsIgnoreCase("customer"))
+            	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
+            else if(loggedinUser.Role.equalsIgnoreCase("admin"))
+            	loadNewPage("AdminMainPage", loginButton, loggedinUser);
+            else if(loggedinUser.Role.equalsIgnoreCase("cinema Manager"))
+            	loadNewPage("SignUp", loginButton, loggedinUser);
+            else
+                actionTarget.setText("Login Successful as a " + loggedinUser.Role + " but not in db");            	
+        }
+    }
+    
+    @FXML
+    public void loadSignup() {
+    	User GuestUser = factory.createUser();
+        loadNewPage("SignUp", signupButton, GuestUser);
+    }
+    
+    public void loadNewPage(String page, Node button, User user) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/" + page + ".fxml"));
+            Parent root = loader.load();
+            CustomerController controller = loader.getController();
+
+            if (controller != null) {
+                controller.setLoginUser(user);
+            }
+            
+            Stage stage = (Stage) button.getScene().getWindow();
+            Scene scene = new Scene(root);
+
+            scene.getStylesheets().add(getClass().getResource("/uipackage/designLayout.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

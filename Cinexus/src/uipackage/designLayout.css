@@ -32,7 +32,7 @@
     -fx-fill: #ff0000;
 }
 
-.signup-button {
+.button {
     -fx-background-color: #FF0022;
     -fx-text-fill: white;
     -fx-pref-width: 100;
