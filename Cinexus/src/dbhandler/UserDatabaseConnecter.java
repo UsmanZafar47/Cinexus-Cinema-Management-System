@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Movie;
+import application.User;
 
 public class UserDatabaseConnecter implements DatabaseConnecter
 {
-	public String getID(String username,  String password)
+	public int getID(String username,  String password)
 	{
 		Connection conn = null;
 	    PreparedStatement stmt = null;
@@ -32,15 +33,15 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        rs = stmt.executeQuery();
 
 	        if (rs.next()) {
-	            String userID = rs.getString("user_id");
+	            int userID = rs.getInt("user_id");
 	            return userID;
 	        }
-	        return "Invalid";
+	        return -1;
 	    } 
 	    catch (SQLException e) 
 	    {
 	        e.printStackTrace();
-	        return "Invalid";
+	        return -1;
 	    } 
 	    finally 
 	    {
@@ -68,16 +69,17 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        stmt = conn.prepareStatement(sql);
 	        rs = stmt.executeQuery();
 
-	        if (rs.next()) {
-	            String colVal = rs.getString(columnName);
-	            return colVal;
+	        if (rs.next()) 
+	        {
+	        	String colVal = rs.getString(columnName);
+	        	return colVal;
 	        }
-	        return "Invalid";
+	        return "not there";
 	    } 
 	    catch (SQLException e) 
 	    {
 	        e.printStackTrace();
-	        return "Invalid";
+	        return "Stackerror";
 	    } 
 	    finally 
 	    {
@@ -90,8 +92,49 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        }
 	    }
 	}
+	public void InsertUser(User user)
+	{
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+
+	    try 
+	    {
+	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+	        String sql = "INSERT into users (username, password, name, cnic, email, role) "
+	        		+ "VALUES (?, ?, ?, ?, ?, ?)";
+
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, user.getUsername());
+	        stmt.setString(2, user.getPassword());
+	        stmt.setString(3, user.getName());
+	        stmt.setString(4, user.getEmail());
+	        stmt.setString(5, user.getcnic());
+	        stmt.setString(6, user.getUserRole());
+	        
+	        int rows = stmt.executeUpdate();
+	        if (rows > 0) {
+	            System.out.println("User inserted successfully.");
+	        } else {
+	            System.out.println("User insertion failed.");
+	        }
+	    } 
+	    catch (SQLException e) 
+	    {
+	        e.printStackTrace();
+	    } 
+	    finally 
+	    {
+	        try {
+	            if (stmt != null) stmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
-	public List<Movie> fetchMoviesFromDatabase() 
+public List<Movie> fetchMoviesFromDatabase() 
 	{
         List<Movie> movies = new ArrayList<>();
 

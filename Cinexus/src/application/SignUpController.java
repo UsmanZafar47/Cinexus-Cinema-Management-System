@@ -12,42 +12,47 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
-
-public class SignUpController {
-
+public class SignUpController 
+{
     @FXML private TextField nameField;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+    @FXML private PasswordField repasswordField;
     @FXML private TextField cnicField;
     @FXML private TextField emailField;
     @FXML private ComboBox<String> roleComboBox;
+    @FXML public Text actionTarget;
     @FXML public Node loginButton;
     @FXML public Node signupButton;
 
     
-    /*public void initialize() {
+    public void initialize() 
+    {
         roleComboBox.setItems(FXCollections.observableArrayList("Cinema Manager", "Admin", "Event Organizer", "Customer"));
-    }*/
+    }
     
     @FXML
-    public void onSignUp(){
-    	/*String name = nameField.getText();
+    public void onSignUp()
+    {
+    	String name = nameField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String repassword = repasswordField.getText();
         String cnic = cnicField.getText();
         String email = emailField.getText();
         String role = roleComboBox.getValue();
-
-        boolean success = UserRegistration.registerUser(username, password, name, cnic, email, role);
-        if (success) {
-            System.out.println("Registered Successfully");
-        } else {
-            System.out.println("Registration failed");
-            // Registration failed
-        }*/
-
-        System.out.println("Registered Successfully");
+        
+        if((password.equals(repassword)))
+        {	
+	        User NewUser = factory.createNewUser(name, username, password, cnic, email, role);
+	
+	        if (NewUser.getUserID() == -1) 
+	            actionTarget.setText("Registered Failed");
+	        else
+	            actionTarget.setText("Registration Successfully! You Can Now Log In.");
+        }
+        else
+            actionTarget.setText("Passwords do not match.");
     }
     
     @FXML
