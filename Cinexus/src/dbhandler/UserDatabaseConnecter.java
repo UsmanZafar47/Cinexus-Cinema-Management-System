@@ -109,7 +109,7 @@ public class UserDatabaseConnecter implements DatabaseConnecter
 	        stmt.setString(2, user.getPassword());
 	        stmt.setString(3, user.getName());
 	        stmt.setString(4, user.getEmail());
-	        stmt.setString(5, user.getcnic());
+	        stmt.setString(5, user.getCNIC());
 	        stmt.setString(6, user.getUserRole());
 	        
 	        int rows = stmt.executeUpdate();

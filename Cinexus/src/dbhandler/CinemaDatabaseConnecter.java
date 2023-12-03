@@ -25,9 +25,7 @@ public class CinemaDatabaseConnecter implements DatabaseConnecter
 	    try 
 	    {
 	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
 	        String sql = "SELECT cinema_id FROM cinema WHERE name = ? AND location = ? AND manager_id = ?";
-
 	        stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, name);
 	        stmt.setString(2, location);
@@ -62,16 +60,12 @@ public class CinemaDatabaseConnecter implements DatabaseConnecter
 		Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-
 	    try 
 	    {
 	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
-	        String sql = "SELECT "+columnName+" FROM users WHERE user_id = " + id;
-
+	        String sql = "SELECT "+columnName+" FROM cinema WHERE cinema_id = " + id;
 	        stmt = conn.prepareStatement(sql);
 	        rs = stmt.executeQuery();
-
 	        if (rs.next()) 
 	        {
 	        	String colVal = rs.getString(columnName);

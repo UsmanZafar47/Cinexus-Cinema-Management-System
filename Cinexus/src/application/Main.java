@@ -52,15 +52,13 @@ public class Main extends Application
         String password = passwordField.getText();
         
         User loggedinUser = factory.createUser(username, password);
-        
+    	
 		if (loggedinUser.getUserID() == -1)
             actionTarget.setText("Invalid Username or Password");
 		else 
         {
             if (loggedinUser.getUserRole().equalsIgnoreCase("Customer"))
             	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
-            else if(loggedinUser.getUserRole().equalsIgnoreCase("EventOrganizer"))
-            	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
             else if(loggedinUser.getUserRole().equalsIgnoreCase("Cinema Manager"))
             	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
             else
@@ -95,8 +93,10 @@ public class Main extends Application
 			if(page.equals("CustomerMainPage"))
 			{
 				CustomerController controller = loader.getController();
-	            if (controller != null)
-	                controller.setLoginUser(user);
+	            if (controller != null && user != null)
+	                controller.initialize(user);
+	            else 
+		        	System.out.println("Here");
 			}
 			else if(page.equals("CinemaManagerMainPage"))
 			{

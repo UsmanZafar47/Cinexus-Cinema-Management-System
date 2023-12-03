@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.List;
 import javafx.application.Application;
@@ -25,12 +26,8 @@ public class CustomerController
     @FXML private Node Trackticket;
     @FXML private VBox movieListView;
 
-	public void setLoginUser(User user) 
-	{
-		this.CustomerInfo = factory.createUser(user);
-	}
-	
-    public void initialize() {
+    public void initialize(User user) {
+    	this.CustomerInfo = factory.createUser(user);
         MovieDatabaseConnecter MovieDB = new MovieDatabaseConnecter();
         List<Movie> movies = MovieDB.fetchMoviesFromDatabase();
         
@@ -94,27 +91,22 @@ public class CustomerController
     @FXML
     private void viewMovie(int movieId) {
         try {
-            // Load the FXML file for the "MovieDetailsPage" page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/MovieDetailsPage.fxml"));
             Parent root = loader.load();
-
-            // Get the controller for the "MovieDetailsPage" page
             MovieDetailsPage movieDetailsController = loader.getController();
-
-            // Fetch movie details from the database using MovieDatabaseConnecter
             MovieDatabaseConnecter movieDB = new MovieDatabaseConnecter();
             List<Label> movieDetails = movieDB.movieDetails(movieId);
 
-            // Extract movie details from the List<Label>
             String movieName = movieDetails.get(0).getText().replace("Movie Name: ", "");
             String cinemaName = movieDetails.get(1).getText().replace("Cinema Name: ", "");
             String showtimes = movieDetails.get(2).getText().replace("Showtimes:\n", "");
 
-            // Call setMovieDetails to set the movie details in the UI
             movieDetailsController.setMovieDetails(movieName, cinemaName, showtimes);
-
+            
+            if (movieDetailsController != null) {
+            	movieDetailsController.initialize(CustomerInfo);
+            }
             Scene scene = new Scene(root);
-            // Get the stage from any node (e.g., "movieListView")
             Stage stage = (Stage) movieListView.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
@@ -131,7 +123,7 @@ public class CustomerController
             CustomerController controller = loader.getController();
 
             if (controller != null) {
-                controller.setLoginUser(null);
+                controller.initialize(CustomerInfo);
             }
             
             Stage stage = (Stage) button.getScene().getWindow();

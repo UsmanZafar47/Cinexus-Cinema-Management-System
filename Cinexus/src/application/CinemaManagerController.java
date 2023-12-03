@@ -47,9 +47,9 @@ public class CinemaManagerController
         HBox entry = new HBox(10);
         VBox container = new VBox(5);
 
-        Label cinemaInfoLabel = new Label("Cinema ID: " + Cinema.getCinemaid() + 
-        		"\nCinema Name: " + Cinema.getName() + 
-        		"\nCinema Location: " + Cinema.getLocation());
+        Label cinemaInfoLabel = new Label("Cinema ID: " + cinema.getCinemaid() + 
+        		"\nCinema Name: " + cinema.getName() + 
+        		"\nCinema Location: " + cinema.getLocation());
         cinemaInfoLabel.setStyle("-fx-font-weight: bold;");
 
         container.setMargin(cinemaInfoLabel, new Insets(0, 10, 0, 10));

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS Cinexus
-use Cinexus
+CREATE DATABASE IF NOT EXISTS Cinexus;
+use Cinexus;
 
 DROP TABLE users;
 CREATE TABLE users (
@@ -39,29 +39,21 @@ JOIN showtimes s ON m.movie_id = s.movie_id
 JOIN cinema c ON s.cinema_id = c.cinema_id  
 GROUP BY m.title, c.name;
 
-drop table movies
 
 DROP TABLE cinema;
 CREATE TABLE cinema (
     cinema_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL unique,
     location VARCHAR(255) NOT NULL,
 	manager_id int NOT NULL,
+    seatprice int NOT NULL,
+    noSeats int NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-insert into cinema (name, location, manager_id) values 
-("Cinepex","Islamabad", 2), ("Megapex","Islamabad", 2);
+insert into cinema (name, location, manager_id, seatprice, noSeats) values 
+("Cinepex","Islamabad", 2, 250, 58), ("Megapex","Islamabad", 2, 350, 25);
 select * from cinema;
 SELECT * FROM cinema WHERE manager_id = 2;
-
-CREATE TABLE seats (
-    seat_id INT AUTO_INCREMENT PRIMARY KEY,
-    cinema_id INT NOT NULL,
-    FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id) ON DELETE CASCADE
-);
-Select * FROM seats;
-INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES (1, 1, '2023-12-10 18:00:00');
-insert into showtimes (movie_id, cinema_id, showtime) values (1, 2, '2023-12-10 19:00:00');
 
 
 DROP Table showtimes;
@@ -84,28 +76,17 @@ CREATE TABLE tickets (
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     showtime_id INT,
+    seatCount INT,
     price DECIMAL(10, 2) NOT NULL,
-    status ENUM('reserved', 'booked','cancelled') NOT NULL,
+    status ENUM('Reserved', 'Booked','Cancelled') NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (showtime_id) REFERENCES showtimes(showtime_id) ON DELETE CASCADE
 );
-
-drop table events
-CREATE TABLE events (
-    event_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL,
-    cinema_id INT,
-    FOREIGN KEY (cinema_id) REFERENCES cinemas(cinema_id)
-);
+Select * from tickets;
 
 CREATE TABLE payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     amount DECIMAL(10, 2) NOT NULL,
-    status ENUM('pending', 'completed', 'failed') NOT NULL,
-    payment_date DATETIME NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

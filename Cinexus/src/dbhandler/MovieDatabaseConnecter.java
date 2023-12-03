@@ -24,12 +24,9 @@ public class MovieDatabaseConnecter implements DatabaseConnecter
 	    try 
 	    {
 	        conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
-	        String sql = "SELECT "+columnName+" FROM users WHERE user_id = " + id;
-
+	        String sql = "SELECT "+columnName+" FROM movies WHERE movie_id = " + id;
 	        stmt = conn.prepareStatement(sql);
 	        rs = stmt.executeQuery();
-
 	        if (rs.next()) 
 	        {
 	        	String colVal = rs.getString(columnName);
