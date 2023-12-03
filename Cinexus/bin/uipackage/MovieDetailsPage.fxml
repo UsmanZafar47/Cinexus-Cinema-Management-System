@@ -2,11 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MovieDetailsPage">
    <children>
+   <Button fx:id="GoHome" onAction="#LoadMain" prefHeight="36.0" prefWidth="89.0" style="-fx-background-color: red;" styleClass="custom-button" text="Go Home" textFill="WHITE" />
       <Label prefHeight="28.0" prefWidth="118.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 19;" text="Movie Details">
          <VBox.margin>
             <Insets />
@@ -29,7 +34,16 @@
       <Label fx:id="showtimesLabel" prefHeight="96.0" prefWidth="342.0" style="-fx-background-color: black; -fx-text-fill: white;" text="Showtimes:">
          <VBox.margin>
             <Insets left="40.0" />
-         </VBox.margin></Label>
+         </VBox.margin>
+      </Label>
       <Line endX="700.2929077148438" endY="-8.690357208251953E-5" startX="-100.0" stroke="#c97f7f" />
+      
+      <HBox>
+            <TextField fx:id="ShowingIDField" promptText="Enter Showing ID" styleClass="text-field" />
+            <TextField fx:id="SeatCountField" promptText="Enter No. of Seats" styleClass="text-field" />
+            <Button fx:id="reserveSeats" onAction="#onBooking" style="-fx-background-color: Red;" styleClass="button" text="Reserve Seats" textFill="WHITE" />
+      		<Text fx:id="actionTarget" styleClass="action-text" />
+      </HBox>
+      
    </children>
 </VBox>

@@ -17,6 +17,13 @@ public class Showings {
 		ShowingsDB.InsertinDB(this);
 		this.setShowtime_id(getShowtime_id());
 	}
+	
+	public Showings(int id) {
+		this.setShowtime_id(id);
+		this.setMovie_id(Integer.parseInt(ShowingsDB.get(id, "movie_id")));
+		this.setCinema_id(Integer.parseInt(ShowingsDB.get(id, "cinema_id")));
+		this.setShowtime(ShowingsDB.get(id, "showtime"));
+	}
 
 	public int getShowtime_id() {
 		if (showtime_id == -1)

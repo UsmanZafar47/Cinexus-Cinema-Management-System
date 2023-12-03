@@ -1,7 +1,5 @@
 package application;
 
-import java.sql.SQLException;
-
 import dbhandler.CinemaDatabaseConnecter;
 
 public class Cinema 
@@ -10,8 +8,19 @@ public class Cinema
     private static String name;
     private static String location;
     private static int manager_id;
+    private static int seatprice;
+    private static int noSeats;
 	CinemaDatabaseConnecter CinemaDB = new CinemaDatabaseConnecter();
     
+	public Cinema(int id) {
+		this.setCinemaid(id);
+		this.setName(CinemaDB.get(id, "name"));
+		this.setLocation(CinemaDB.get(id, "location"));
+		this.setManager_id(Integer.parseInt(CinemaDB.get(id, "manager_id")));
+		this.setSeatprice(Integer.parseInt(CinemaDB.get(id, "seatprice")));
+		this.setNoSeats(Integer.parseInt(CinemaDB.get(id, "noSeats")));
+	}
+	
     public Cinema(int cinema_id, String name, String location, int manager_id)
     {
     	setCinemaid(cinema_id);
@@ -34,20 +43,20 @@ public class Cinema
 		}
 	}
     
-	public static int getCinemaid() 
+	public int getCinemaid() 
 	{
 		return cinema_id;
 	}
 	public void setCinemaid(int cinema_id) {
 		this.cinema_id = cinema_id;
 	}
-	public static String getName() {
+	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public static String getLocation() {
+	public String getLocation() {
 		return location;
 	}
 	public void setLocation(String location) {
@@ -58,5 +67,21 @@ public class Cinema
 	}
 	public void setManager_id(int manager_id) {
 		this.manager_id = manager_id;
+	}
+
+	public int getSeatprice() {
+		return seatprice;
+	}
+
+	public void setSeatprice(int seatprice) {
+		Cinema.seatprice = seatprice;
+	}
+
+	public int getNoSeats() {
+		return noSeats;
+	}
+
+	public void setNoSeats(int noSeats) {
+		Cinema.noSeats = noSeats;
 	}
 }
