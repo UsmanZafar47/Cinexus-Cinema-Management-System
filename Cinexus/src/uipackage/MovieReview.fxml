@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="508.0" prefWidth="688.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MovieReviewsController">
+    <children>
+        <RadioButton fx:id="movieReviewRadioButton" text="Movie Review" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+        <RadioButton fx:id="cinemaFeedbackRadioButton" text="Cinema Feedback" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0" />
+        <TextField fx:id="idTextField" promptText="Enter Movie/Cinema ID" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0" />
+        <TextArea fx:id="feedbackTextArea" prefHeight="200.0" prefWidth="300.0" promptText="Enter your feedback here" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="110.0" />
+        <Button graphicTextGap="5.0" onAction="#submitFeedback" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: red;" text="Submit" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="320.0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+    </children>
+</AnchorPane>

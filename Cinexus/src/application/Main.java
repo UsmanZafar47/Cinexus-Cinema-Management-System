@@ -10,6 +10,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
 import javafx.application.Application;
 
 public class Main extends Application 
@@ -114,7 +117,15 @@ public class Main extends Application
         }
     }
 
+    @FXML
+    public void loadMovieReviewPage() {
+       
+          //loadNewPage("MovieReview",);      
+    }
+
     public static void main(String[] args) {
         launch(args);
 	}   
 }
+
+
