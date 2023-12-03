@@ -7,7 +7,11 @@
     -fx-font-weight: bold;
     -fx-fill: #000000;
 }
-
+.title-2 {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-fill: #0A0A0A;
+}
 .text-field {
     -fx-pref-width: 200;
     -fx-font-size: 14px;

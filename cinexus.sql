@@ -76,7 +76,7 @@ INSERT INTO showtimes (movie_id, cinema_id, showtime) VALUES
 (1, 1, '2023-12-10 18:00:00'), (1, 2, '2023-12-10 19:00:00'), 
 (2, 1, '2023-12-10 20:00:00'), (2, 2, '2023-12-10 21:00:00'), 
 (3, 1, '2023-12-10 22:00:00'), (3, 2, '2023-12-10 23:00:00');
-
+Select * from showtimes;
 
 DROP Table tickets;
 CREATE TABLE tickets (

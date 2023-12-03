@@ -78,7 +78,7 @@ public class CinemaManagerController
     
     @FXML
     public void addDeleteShowings() {
-    	loadNewPage("SignUp", ArrangeShowings);
+    	loadNewPage("ArrangeShowings", ArrangeShowings);
     }
     
     @FXML
@@ -96,6 +96,12 @@ public class CinemaManagerController
             if(page.equals("AddCinema"))
 			{
             	AddCinemaController controller = loader.getController();
+	            if (controller != null)
+	                controller.initialize(CinemaManagerInfo);
+			}
+            else if(page.equals("ArrangeShowings"))
+			{
+            	ArrangeShowingsController controller = loader.getController();
 	            if (controller != null)
 	                controller.initialize(CinemaManagerInfo);
 			}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="ArrangeShowingsPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ArrangeShowingsController">    
+ <children>
+	<VBox alignment="CENTER" prefHeight="462.0" prefWidth="726.0" spacing="10.0" style="-fx-background-color: white;" stylesheets="@designLayout.css">
+		<HBox alignment="CENTER" spacing="50.0">
+			<Button fx:id="GoHome" onAction="#LoadMain" styleClass="custom-button" text="Go Home"/>
+			<Text styleClass="title" text="Manage Showings" />
+		</HBox>
+		<HBox alignment="CENTER" spacing="10.0">
+			<VBox alignment="CENTER">
+				<Text styleClass="title-2" text="Add New Showings" />
+				<TextField fx:id="MovieField" promptText="Movie ID" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" styleClass="text-field" />
+			    <TextField fx:id="CinemaField" promptText="Cinema ID" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" styleClass="text-field" />
+			    <DatePicker fx:id="ShowingDate" prefHeight="30.0" prefWidth="150.0" />
+		    	<Button fx:id="AddShowButton" onAction="#onAddingShowing" styleClass="button" text="Add Showing" />
+				<Text fx:id="actionTarget" styleClass="action-text" />
+			</VBox>
+			<VBox alignment="CENTER" spacing="10.0">
+				<Text styleClass="title-2" text="Delete Showings" />
+				<TextField fx:id="RemoveShowings" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Showing ID" styleClass="text-field" />
+        		<Button fx:id="DeleteShowing" text="Close Showing" styleClass="custom-button"  onAction="#DeleteShowing"/>
+			</VBox>
+		</HBox>		
+		
+		<Text styleClass="title-2" text="Current Showings" />
+		<!-- Display List of Showings -->
+		   
+	</VBox>
+ </children>
+</AnchorPane>

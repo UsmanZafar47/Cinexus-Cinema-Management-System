@@ -1,7 +1,10 @@
 package application;
 
+import java.time.LocalDate;
+
 public class factory 
 {
+	//------------ Users
 	static User createUser()
 	{
 		User newUser = new User();
@@ -23,9 +26,17 @@ public class factory
 		newUser.newUser(name, username, password, cnic, email, role);
 		return newUser;
 	}
+	
+	//------------- Cinema
 	static Cinema createNewCinema(String name, String location, int noseats, int manager_id)
 	{
 		Cinema newCinema = new Cinema(name, location, noseats, manager_id);
-		return null;
+		return newCinema;
+	}
+	
+	//-------------- Showings
+	public static Showings createNewShowing(int movie, int cinema, String date) {
+		Showings newShow = new Showings(movie, cinema, date);
+		return newShow;
 	}
 }

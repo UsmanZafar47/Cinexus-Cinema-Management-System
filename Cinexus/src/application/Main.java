@@ -56,7 +56,7 @@ public class Main extends Application
         {
             if (loggedinUser.getUserRole().equalsIgnoreCase("Customer"))
             	loadNewPage("CustomerMainPage", loginButton, loggedinUser);
-            else if(loggedinUser.getUserRole().equalsIgnoreCase("Admin"))
+            else if(loggedinUser.getUserRole().equalsIgnoreCase("EventOrganizer"))
             	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
             else if(loggedinUser.getUserRole().equalsIgnoreCase("Cinema Manager"))
             	loadNewPage("CinemaManagerMainPage", loginButton, loggedinUser);
