@@ -66,4 +66,9 @@ public class factory
 		Tickets newticket = new Tickets(ticket);
 		return newticket;
 	}
+	public static Tickets ExistingTicket(int tickID)
+	{
+		Tickets newticket = new Tickets(tickID);
+		return newticket;
+	}
 }

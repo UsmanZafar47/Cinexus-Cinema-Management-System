@@ -24,6 +24,7 @@ public class CustomerController
 	private User CustomerInfo;
 	@FXML private TextField ticketNoField;
     @FXML private Node Trackticket;
+    @FXML private Node AddReviewButton;
     @FXML private VBox movieListView;
 
     public void initialize(User user) {
@@ -81,13 +82,14 @@ public class CustomerController
     @FXML
     public void trackTicket() {
         String ticketNo = ticketNoField.getText();
-        List<String> Controlleritems = null;
-        Controlleritems.add(""+CustomerInfo.getUserID());
-        Controlleritems.add(ticketNo);
-        
-    	loadNewPage("SignUp", Trackticket, Controlleritems);
+        Tickets ticket = factory.ExistingTicket(Integer.parseInt(ticketNo));
+        loadNewPage("TicketPage", Trackticket);
     }
-
+    @FXML
+    public void AddReviewButton() {
+        loadNewPage("MovieReview", AddReviewButton);
+    }
+    
     @FXML
     private void viewMovie(int movieId) {
         try {
@@ -115,16 +117,27 @@ public class CustomerController
         }
     }
 
-    public void loadNewPage(String page, Node button, List<String> nextControllerInfo) 
+    public void loadNewPage(String page, Node button) 
     {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/uipackage/" + page + ".fxml"));
             Parent root = loader.load();
-            CustomerController controller = loader.getController();
 
-            if (controller != null) {
-                controller.initialize(CustomerInfo);
-            }
+            if(page.equals("CustomerMainPage"))
+			{
+				CustomerController controller = loader.getController();
+	            if (controller != null)
+	                controller.initialize(CustomerInfo);
+	            else 
+		        	System.out.println("Here");
+			}
+			else if(page.equals("MovieReview"))
+			{}
+			else if(page.equals("trackTicket"))
+			{
+				TicketController controller = loader.getController();
+
+			}
             
             Stage stage = (Stage) button.getScene().getWindow();
             Scene scene = new Scene(root);

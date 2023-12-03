@@ -28,6 +28,18 @@ public class Tickets
 		setPrice((SeatCount*cinema.getSeatprice()));
 		setStatus("Pending");
 	}
+	public Tickets (int ticketid) 
+	{
+		setTicketID(ticketid);
+		this.user = factory.ExistingUser(user.getUserID());
+		this.ShowingID = Integer.parseInt(TicketDB.get(ticketid, "showtime_id"));
+		this.show = factory.ExistingShowing(ShowingID);
+		this.setCinema(factory.ExistingCinema(show.getCinema_id()));
+		this.setMovie(factory.ExistingMovies(show.getMovie_id()));
+		this.SeatCount = Integer.parseInt(TicketDB.get(ticketid, "seatCount"));
+		setPrice((SeatCount*cinema.getSeatprice()));
+		setStatus("Pending");
+	}
 	public Tickets (Tickets ticket) 
 	{
 		setTicketID(ticket.ticketID);

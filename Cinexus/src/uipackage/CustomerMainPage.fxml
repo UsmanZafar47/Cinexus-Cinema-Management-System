@@ -14,6 +14,7 @@
             <TextField fx:id="ticketNoField" promptText="Enter Ticket No." styleClass="text-field" />
             <Button fx:id="Trackticket" onAction="#trackTicket" style="-fx-background-color: Red;" styleClass="button" text="Track Ticket" textFill="WHITE" />
             </HBox>
+            <Button fx:id="AddReviewButton" onAction="#AddReviewButton" style="-fx-background-color: Red;" styleClass="button" text="Add Feedback" textFill="WHITE" />
 
             <!-- Title -->
             <Label prefHeight="24.0" prefWidth="72.0" style="-fx-text-fill: white;" styleClass="title" text="Movie List" />

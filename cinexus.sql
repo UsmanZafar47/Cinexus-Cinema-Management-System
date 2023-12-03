@@ -90,3 +90,35 @@ CREATE TABLE payments (
     amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+CREATE TABLE movie_reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    movie_id INT,
+    review_text TEXT NOT NULL,
+    rating INT NOT NULL,
+    review_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE
+);
+
+ALTER TABLE movie_reviews MODIFY COLUMN rating INT DEFAULT 0;
+ALTER TABLE movie_reviews MODIFY COLUMN review_date DATETIME DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE cinema_feedback MODIFY COLUMN feedback_date DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+
+
+
+select* from cinema_feedback
+select* from movie_reviews
+
+-- Create the cinema_feedback table
+CREATE TABLE cinema_feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    cinema_id INT,
+    feedback_text TEXT NOT NULL,
+    feedback_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (cinema_id) REFERENCES cinema(cinema_id) ON DELETE CASCADE
+);
