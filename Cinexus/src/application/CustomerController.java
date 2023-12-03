@@ -51,8 +51,8 @@ public class CustomerController
         Button viewMovieButton = new Button("View Movie");
         
         
-        bookSeatsButton.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
-        viewMovieButton.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
+        bookSeatsButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
+        viewMovieButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
 
         container.getChildren().addAll(movieInfoLabel, bookSeatsButton, viewMovieButton);
         viewMovieButton.setOnAction(event -> viewMovie(movie.getId()));
