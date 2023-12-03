@@ -1,16 +1,17 @@
 .background {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #343434;
+    
 }
 
 .title {
     -fx-font-size: 36px;
     -fx-font-weight: bold;
-    -fx-fill: #000000;
+    -fx-fill: #ffffff;
 }
 .title-2 {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-fill: #0A0A0A;
+    -fx-fill: #ffffff;
 }
 .text-field {
     -fx-pref-width: 200;
@@ -28,9 +29,10 @@
 .custom-button {
     -fx-background-color: #000000;
     -fx-text-fill: white;
-    -fx-pref-width: 100;
+    -fx-pref-width: 150;
     -fx-font-size: 14px;
 }
+
 
 .action-text {
     -fx-fill: #ff0000;

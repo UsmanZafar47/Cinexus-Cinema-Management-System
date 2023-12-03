@@ -83,9 +83,8 @@ CREATE TABLE tickets (
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     showtime_id INT,
-    seat_number INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    status ENUM('booked', 'cancelled') NOT NULL,
+    status ENUM('reserved', 'booked','cancelled') NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (showtime_id) REFERENCES showtimes(showtime_id) ON DELETE CASCADE
 );

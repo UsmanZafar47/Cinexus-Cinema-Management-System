@@ -16,11 +16,11 @@
             <TextField fx:id="usernameField" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Username" styleClass="text-field" />
             <PasswordField fx:id="passwordField" maxWidth="224.0" prefHeight="30.0" prefWidth="224.0" promptText="Password" styleClass="text-field" />
             <HBox maxWidth="220.0" spacing="10">
-                <CheckBox fx:id="rememberMeCheckBox" maxWidth="200.0" prefHeight="17.0" prefWidth="121.0" text="Remember Me" />
+                <CheckBox fx:id="rememberMeCheckBox" maxWidth="200.0" prefHeight="17.0" prefWidth="121.0" text="Remember Me" textFill="WHITE" />
             </HBox>
-            <Button fx:id="loginButton" onAction="#onLogin" styleClass="custom-button" text="Log In" />
+            <Button fx:id="loginButton" onAction="#onLogin" style="-fx-background-color: red;" styleClass="custom-button" text="Log In" />
             <Text fx:id="actionTarget" styleClass="action-text" />
-             <Text text="     Don't have an account? " textOrigin="BOTTOM" wrappingWidth="161.27734375" />
+             <Text fill="#5577e8" text="     Don't have an account? " textOrigin="BOTTOM" wrappingWidth="161.27734375" />
              <Button fx:id="signupButton" maxWidth="100.0" onAction="#loadSignup" prefHeight="22.0" prefWidth="237.0" styleClass="signup-button" text="Signup" />
             <HBox maxHeight="200.0" maxWidth="300.0" prefHeight="55.0" prefWidth="272.0" />
         </VBox>
