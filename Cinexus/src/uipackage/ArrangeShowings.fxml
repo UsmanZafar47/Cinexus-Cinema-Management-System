@@ -1,93 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="ArrangeShowingsPane" prefHeight="532.0" prefWidth="653.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ArrangeShowingsController">    
+
+<AnchorPane fx:id="ArrangeShowingsPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ArrangeShowingsController">    
  <children>
-	<VBox alignment="CENTER" prefHeight="532.0" prefWidth="726.0" spacing="10.0" style="-fx-background-color: black;" stylesheets="@designLayout.css" AnchorPane.bottomAnchor="0.0">
-		<HBox alignment="CENTER" prefHeight="175.0" prefWidth="706.0">
-			<VBox alignment="CENTER" styleClass="background">
+	<VBox alignment="CENTER" prefHeight="462.0" prefWidth="726.0" spacing="10.0" style="-fx-background-color: white;" stylesheets="@designLayout.css">
+		<HBox alignment="CENTER" spacing="50.0">
+			<Button fx:id="GoHome" onAction="#LoadMain" styleClass="custom-button" text="Go Home"/>
+			<Text styleClass="title" text="Manage Showings" />
+		</HBox>
+		<HBox alignment="CENTER" spacing="10.0">
+			<VBox alignment="CENTER">
 				<Text styleClass="title-2" text="Add New Showings" />
-				<TextField fx:id="MovieField" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Movie ID" styleClass="text-field" />
-			    <TextField fx:id="CinemaField" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Cinema ID" styleClass="text-field" />
+				<TextField fx:id="MovieField" promptText="Movie ID" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" styleClass="text-field" />
+			    <TextField fx:id="CinemaField" promptText="Cinema ID" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" styleClass="text-field" />
 			    <DatePicker fx:id="ShowingDate" prefHeight="30.0" prefWidth="150.0" />
-		    	<Button fx:id="AddShowButton" onAction="#onAddingShowing" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: red;" styleClass="button" text="Add Showing" textFill="WHITE">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <effect>
-                     <Glow />
-                  </effect>
-                  <VBox.margin>
-                     <Insets top="5.0" />
-                  </VBox.margin>
-                  <font>
-                     <Font size="13.0" />
-                  </font></Button>
+		    	<Button fx:id="AddShowButton" onAction="#onAddingShowing" styleClass="button" text="Add Showing" />
 				<Text fx:id="actionTarget" styleClass="action-text" />
-               <padding>
-                  <Insets left="30.0" right="30.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
 			</VBox>
-			<VBox alignment="CENTER" prefHeight="166.0" prefWidth="234.0" spacing="10.0" styleClass="background">
+			<VBox alignment="CENTER" spacing="10.0">
 				<Text styleClass="title-2" text="Delete Showings" />
 				<TextField fx:id="RemoveShowings" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Showing ID" styleClass="text-field" />
-        		<Button fx:id="DeleteShowing" onAction="#DeleteShowing" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: red;" styleClass="custom-button" text="Close Showing" />
-               <padding>
-                  <Insets left="40.0" right="40.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets left="40.0" />
-               </HBox.margin>
+        		<Button fx:id="DeleteShowing" text="Close Showing" styleClass="custom-button"  onAction="#DeleteShowing"/>
 			</VBox>
-            <VBox.margin>
-               <Insets left="20.0" />
-            </VBox.margin>
-            <padding>
-               <Insets right="69.0" />
-            </padding>
 		</HBox>		
 		
-		<Text styleClass="title-2" text="Current Showings" wrappingWidth="217.2421875">
-            <VBox.margin>
-               <Insets />
-            </VBox.margin></Text>
+		<Text styleClass="title-2" text="Current Showings" />
 		<!-- Display List of Showings -->
 		   
 	</VBox>
-		<HBox alignment="CENTER" prefHeight="61.0" prefWidth="726.0" spacing="50.0" styleClass="background" stylesheets="@designLayout.css">
-			<Button fx:id="GoHome" onAction="#LoadMain" prefHeight="36.0" prefWidth="89.0" style="-fx-background-color: red;" styleClass="custom-button" text="Go Home" textFill="WHITE">
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-            <effect>
-               <Glow />
-            </effect>
-            <HBox.margin>
-               <Insets right="40.0" />
-            </HBox.margin>
-         </Button>
-			<Text fill="WHITE" style="-fx-font-size: 40;" styleClass="title" text="Manage Showings">
-            <HBox.margin>
-               <Insets right="40.0" />
-            </HBox.margin>
-         </Text>
-         <padding>
-            <Insets right="150.0" />
-         </padding>
-		</HBox>
  </children>
 </AnchorPane>
