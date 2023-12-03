@@ -39,6 +39,7 @@ JOIN showtimes s ON m.movie_id = s.movie_id
 JOIN cinema c ON s.cinema_id = c.cinema_id  
 GROUP BY m.title, c.name;
 
+drop table movies
 
 DROP TABLE cinema;
 CREATE TABLE cinema (
@@ -89,7 +90,7 @@ CREATE TABLE tickets (
     FOREIGN KEY (showtime_id) REFERENCES showtimes(showtime_id) ON DELETE CASCADE
 );
 
-
+drop table events
 CREATE TABLE events (
     event_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

@@ -6,7 +6,7 @@ public interface DatabaseConnecter
 {
 	static final String URL = "jdbc:mysql://localhost/Cinexus";
 	static final String USER = "root";
-	static final String PASSWORD = "mySQLroot";
+	static final String PASSWORD = "4326";
 	
     String get(int userID, String columnName);
 }

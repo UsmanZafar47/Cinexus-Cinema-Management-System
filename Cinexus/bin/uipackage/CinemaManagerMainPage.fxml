@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="CinemaManagerMainPane" prefHeight="600.0" prefWidth="800.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" 
-xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CinemaManagerController">
+<AnchorPane fx:id="CinemaManagerMainPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CinemaManagerController">
     <children>
-        <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #F0F0F0; padding: 20px;">
+    
+        <VBox alignment="CENTER_LEFT" layoutX="6.0" prefHeight="145.0" prefWidth="334.0" spacing="20.0" style="-fx-background-color: black; padding: 20px;">
             <HBox>
-	            <Button fx:id="AddCinema" text="Add Cinema" styleClass="button"  onAction="#addCinema"/>
-	            <Button fx:id="ArrangeShowings" text="Arrange Showings" styleClass="button"  onAction="#addDeleteShowings"/>
+	            <Button fx:id="AddCinema" onAction="#addCinema" style="-fx-background-color: red;" styleClass="button" text="Add Cinema" textFill="WHITE" />
+	            <Button fx:id="ArrangeShowings" onAction="#addDeleteShowings" style="-fx-background-color: red;" styleClass="button" text="Arrange Showings" textFill="WHITE" />
             </HBox>
 
             <!-- Title -->
-            <Label styleClass="title" text="Cinema List" />
+            <Label styleClass="title" text="Cinema List" textFill="WHITE" />
 
             <!-- Cinema List -->
             <VBox fx:id="CinemaListView" spacing="10">
@@ -24,7 +25,7 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CinemaManagerCont
             </VBox>
             <HBox>
             <TextField fx:id="CenimaIDforDelete" maxWidth="226.0" prefHeight="30.0" prefWidth="295.0" promptText="Cinema ID" styleClass="text-field" />
-            <Button fx:id="DeleteCinema" text="Delete Cinema" styleClass="custom-button"  onAction="#DeleteCinema"/>
+            <Button fx:id="DeleteCinema" onAction="#DeleteCinema" prefHeight="28.0" prefWidth="94.0" style="-fx-background-color: red;" styleClass="custom-button" text="Delete Cinema" textFill="WHITE" />
             </HBox>
         </VBox>
     </children>

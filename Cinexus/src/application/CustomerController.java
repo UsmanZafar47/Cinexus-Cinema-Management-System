@@ -46,13 +46,13 @@ public class CustomerController
         VBox container = new VBox(5);
 
         Label movieInfoLabel = new Label("Movie ID: " + movie.getId() + "\nTitle: " + movie.getTitle());
-        movieInfoLabel.setStyle("-fx-font-weight: bold;");
+        movieInfoLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
         Button bookSeatsButton = new Button("Book Seats");
         Button viewMovieButton = new Button("View Movie");
         
         
-        bookSeatsButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
-        viewMovieButton.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
+        bookSeatsButton.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
+        viewMovieButton.setStyle("-fx-background-color: #FF0000; -fx-text-fill: white;");
 
         container.getChildren().addAll(movieInfoLabel, bookSeatsButton, viewMovieButton);
         viewMovieButton.setOnAction(event -> viewMovie(movie.getId()));
